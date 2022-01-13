@@ -1,10 +1,3 @@
-/*
-Name: Kartik Patel
-Student ID: 1052085
-Date: March 22, 2020
-Assignment 3
-*/
-
 //Libraries
 #include <stdio.h>
 #include <stdlib.h>
