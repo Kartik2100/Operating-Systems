@@ -1,0 +1,299 @@
+(Q1)
+
+1KB = 1024 bytes = 2^10 bytes
+Therefore the number of offset bits is 10.
+
+a.
+3085
+Binary: 110000001101
+Page number = 0011 = 3
+Offset = 0000001101 = 13
+
+b.
+42095
+Binary: 1010010001101111
+Page number = 00101001 = 41
+Offset = 0001101111 = 111
+
+c.
+215201
+Binary: 110100100010100001
+Page number = 11010010 = 210
+Offset = 0010100001 = 161
+
+d.
+650000
+Binary: 10011110101100010000
+Page number = 1001111010 = 634
+Offset = 1100010000 = 784
+
+e.
+2000001
+Binary: 111101000010010000001
+Page number = 11110100001 = 1953
+Offset = 0010000001 = 129
+
+(Q2)
+
+Page size = 4KB = 4096 bytes = 2^12 bytes
+
+a. How many bits are required in the logical address? 
+
+Page number = 256 = 2^8
+
+total bytes = page number * page size
+            = 2^8 * 2^12
+	    = 2^20
+
+The number of bits required is 20 (the exponent of the total bytes) in the logical address.
+
+b. How many bits are required in the physical address?
+
+Page number = 64 = 2^6
+
+total bytes = page number * page size
+            = 2^6 * 2^12
+	    = 2^18
+
+The number of bits required is 18 (the exponent of the total bytes) in the physical address.
+
+(Q3)
+
+LRU Replacement
+
+1 Frame:
+
+	 * * * * * * * * * * * * * * * * * * * *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+
+Frame 1: 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+
+20 Faults
+
+
+2 Frames:
+         * * * * * * * * * *   * * * * * *   * *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+
+Frame 1: 1 1 3 3 2 2 5 5 2 2   2 7 7 3 3 1   3 3 
+Frame 2: - 2 2 4 4 1 1 6 6 1   3 3 6 6 2 2   2 6
+
+18 Faults
+
+
+3 Frames:
+         * * * *   * * * * *   * * *   * *     *
+       	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 4   4 5 5 5 1   1 7 7   2 2     2
+Frame 2: - 2 2 2   2 2 6 6 6   3 3 3   3 3     3
+Frame 3: - - 3 3   1 1 1 2 2   2 2 6   6 1     1
+
+15 Faults
+
+
+4 Frames:
+         * * * *     * *       * * *     *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1       1 1 6     6     
+Frame 2: - 2 2 2     2 2       2 2 2     2
+Frame 3: - - 3 3     5 5       5 7 7     1
+Frame 4: - - - 4     4 4       3 3 3     3
+
+10 Faults
+
+
+5 Frames:
+         * * * *     * *       * *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1       1 1      
+Frame 2: - 2 2 2     2 2       2 2
+Frame 3: - - 3 3     3 6       6 6
+Frame 4: - - - 4     4 4       3 3
+Frame 5: - - - -     5 5       5 7
+
+8 Faults
+
+
+6 Frames:
+	 * * * *     * *         *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1         1
+Frame 2: - 2 2 2     2 2         2
+Frame 3: - - 3 3     3 3         3
+Frame 4: - - - 4     4 4         7
+Frame 5: - - - -     5 5         5
+Frame 6: - - - -     - 6         6
+
+7 Faults
+
+
+7 Frames:
+         * * * *     * *         *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1         1 
+Frame 2: - 2 2 2     2 2         2
+Frame 3: - - 3 3     3 3         3
+Frame 4: - - - 4     4 4         4
+Frame 5: - - - -     5 5         5
+Frame 6: - - - -     - 6         6
+Frame 7: - - - -     - -         7
+
+7 Faults
+
+
+FIFO Replacement
+
+1 Frame:
+	 * * * * * * * * * * * * * * * * * * * *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+
+20 Faults
+
+
+2 Frames:
+	 * * * * * * * * * *   * * * * * *   * * 
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 3 3 2 2 5 5 2 2   3 3 6 6 2 2   3 3  
+Frame 2: - 2 2 4 4 1 1 6 6 1   1 7 7 3 3 1   1 6
+
+18 Faults
+
+
+3 Frames:
+	 * * * *   * * * * *   * * *   * *   * *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 4   4 4 6 6 6   3 3 3   2 2   2 6
+Frame 2: - 2 2 2   1 1 1 2 2   2 7 7   7 1   1 1
+Frame 3: - - 3 3   3 5 5 5 1   1 1 6   6 6   3 3
+
+16 Faults
+
+
+4 Frames:
+         * * * *     * * * *   * * *   * *   *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     5 5 5 5   3 3 3   3 1   1
+Frame 2: - 2 2 2     2 6 6 6   6 7 7   7 7   3
+Frame 3: - - 3 3     3 3 2 2   2 2 6   6 6   6
+Frame 4: - - - 4     4 4 4 1   1 1 1   2 2   2
+
+14 Faults
+
+
+5 Frames:
+	 * * * *     * *   * * * *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 6   6 6 6 6         
+Frame 2: - 2 2 2     2 2   1 1 1 1
+Frame 3: - - 3 3     3 3   3 2 2 2
+Frame 4: - - - 4     4 4   4 4 3 3
+Frame 5: - - - -     5 5   5 5 5 7
+
+10 Faults
+
+
+6 Frames:
+	 * * * *     * *         *       * * * 
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1         7       7 7 7 
+Frame 2: - 2 2 2     2 2         2       1 1 1
+Frame 3: - - 3 3     3 3         3       3 2 2
+Frame 4: - - - 4     4 4         4       4 4 3
+Frame 5: - - - -     5 5         5       5 5 5
+Frame 6: - - - -     - 6         6       6 6 6
+
+10 Faults
+
+
+7 Frames:
+	 * * * *     * *         *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1         1 
+Frame 2: - 2 2 2     2 2         2
+Frame 3: - - 3 3     3 3         3
+Frame 4: - - - 4     4 4         4
+Frame 5: - - - -     5 5         5
+Frame 6: - - - -     - 6         6
+Frame 7: - - - -     - -         7
+
+7 Faults
+
+
+Optimal Replacement
+
+1 Frame:
+	 * * * * * * * * * * * * * * * * * * * *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+
+20 Faults
+
+
+2 Frames:
+	 * * * *   * * *   *   * * * *   *   * *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 3 4   1 5 6   1   3 7 6 3   1   3 6
+Frame 2: - 2 2 2   2 2 2   2   2 2 2 2   2   2 2
+
+15 Faults
+
+
+3 Frames:
+	 * * * *     * *       * *     * *     *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1       3 3     3 3     3
+Frame 2: - 2 2 2     2 2       2 7     2 2     2
+Frame 3: - - 3 4     5 6       6 6     6 1     6
+
+11 Faults
+
+
+4 Frames:
+         * * * *     * *         *       *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1         7       1
+Frame 2: - 2 2 2     2 2         2       2
+Frame 3: - - 3 3     3 3         3       3
+Frame 4: - - - 4     5 6         6       6
+
+8 Faults
+
+
+5 Frames:
+	 * * * *     * *         *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1         1
+Frame 2: - 2 2 2     2 2         2
+Frame 3: - - 3 3     3 3         3
+Frame 4: - - - 4     4 6         6
+Frame 5: - - - -     5 5         7
+
+7 Faults
+
+
+6 Frames:
+	 * * * *     * *         *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1         1
+Frame 2: - 2 2 2     2 2         2
+Frame 3: - - 3 3     3 3         3
+Frame 4: - - - 4     4 4         7
+Frame 5: - - - -     5 5         5
+Frame 6: - - - -     - 6         6
+
+7 Faults
+
+
+7 Frames:
+	 * * * *     * *         *
+	 1 2 3 4 2 1 5 6 2 1 2 3 7 6 3 2 1 2 3 6
+Frame 1: 1 1 1 1     1 1         1
+Frame 2: - 2 2 2     2 2         2
+Frame 3: - - 3 3     3 3         3
+Frame 4: - - - 4     4 4         4
+Frame 5: - - - -     5 5         5
+Frame 6: - - - -     - 6         6
+Frame 7: - - - -     - -         7
+
+7 Faults
